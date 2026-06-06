@@ -1,0 +1,66 @@
+http://127.0.0.1:5000/
+static/text.txt -> URL
+ 
+1. index.html 
+<!Doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <p>Hello its me Sachin Belbase</p>
+    <img src="{{url_for('static',filename ='NCIT.jpg')}}" alt="Ncit logo" />
+
+    <form method="Post">
+      <label>Enter your name</label>
+      <input type="text" name="name" required />
+      <button type="submit">Submit</button>
+    </form>
+
+    {% if error %}
+    <p style="color: red">{{error}}</p>
+    {% endif %}
+  </body>
+</html>
+
+
+1. app.py
+from flask import Flask, render_template,request
+
+app = Flask(__name__)
+
+
+@app.route("/", methods=['GET', 'POST'])
+def home():
+    error = None
+    if request.method== 'POST':
+          name = request.form['name'].strip()
+          
+          if not name:
+              error = "Name cannot be empty"
+            
+          else:  
+            return f"Hello, {name}"
+        
+    return render_template("index.html",error=error)
+  
+  
+@app.route('/about-me')
+def about():
+    return "Hello its me Sachin Belbase"
+
+
+@app.route("/greet")
+def greet():
+        name = request.args.get('name', "Guest")
+        return f"Hello, {name}"
+    
+    
+if __name__ == '__main__':
+    app.run(debug=True)
+
+
+
+2. index.html

@@ -1,0 +1,12 @@
+{
+     "name": "Sachin",
+     "age": 18,
+     "subjects": [
+          "Web Technology II",
+          "DSA",
+          "DBMS"
+     ],
+     "address": {
+          "city": "Kathmandu"
+     }
+}

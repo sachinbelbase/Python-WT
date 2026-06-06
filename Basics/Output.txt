@@ -1,0 +1,39 @@
+case 1:
+print(x)
+
+case 2:
+print(2+3-2)
+
+case 3:
+formatted string
+x=10
+y=20
+print("The value of x is %d and y is %d" %(x,y))
+
+case 4:
+name='Sachin'
+age=29
+print("The name is {x} and age is {y}".format(x = name, y= age))
+or 
+print("The name is {0} and age is {1}".format(name, age))
+
+case 5:
+print(f'The value of name is {name}')
+
+Ternary Operator is not present in python but we can access ternary operator feature using if else.
+
+x =10
+y =20
+z =30
+
+r = x if (x < y) and (x < z) else y if y > z else z
+print(r)
+
+We can compare using if else
+
+
+Flow Control Statements:
+.lower()= Function
+
+
+
