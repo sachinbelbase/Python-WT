@@ -13,7 +13,6 @@ def home():
     return render_template("index.html",form = form)
 
 
-
 # @app.route("/", methods=['GET', 'POST'])
 # def home():
 #     error = None
