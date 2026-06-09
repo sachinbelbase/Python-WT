@@ -1,16 +1,34 @@
-from flask import Flask, render_template,request
-from form import NameForm
+from flask import Flask, render_template
+from form import RegistrationForm
+# from form import NameForm
 
 app = Flask(__name__)
 app.secret_key = "sachinbelbase"
 
 @app.route("/", methods=['GET', 'POST'])
-def home():
-    form = NameForm()
+def register():
+    form = RegistrationForm()
     if form.validate_on_submit():
-        return f"Hello {form.name.data}"
+        name = form.name.data
+        email = form.email.data
+        gender = form.gender.data
+        country = form.country.data
         
-    return render_template("index.html",form = form)
+        return (
+            f"Hello {name}!<br>"
+            f"Email{email}<br>"
+            f"Gender{gender}<br>"
+            f"Country{country}<br>" 
+        )
+    return render_template("index.html", form=form)
+
+# @app.route("/", methods=['GET', 'POST'])
+# def home():
+#     form = NameForm()
+#     if form.validate_on_submit():
+#         return f"Hello {form.name.data}"
+        
+#     return render_template("index.html",form = form)
 
 
 # @app.route("/", methods=['GET', 'POST'])

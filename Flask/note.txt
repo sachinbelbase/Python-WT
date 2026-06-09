@@ -1,6 +1,8 @@
 http://127.0.0.1:5000/
 static/text.txt -> URL
  
+Notes: HTML and Flask py Code for all the topics I have Done
+
 1. index.html 
 <!Doctype html>
 <html lang="en">
@@ -64,4 +66,137 @@ if __name__ == '__main__':
 
 
 2. index.html
-zpjw abie aozn pqem
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <form method="Post">
+      {{form.hidden_tag()}}
+      {{form.name.label}}
+      {{form.name(size = 30)}}
+      {% if form.name.errors %}
+      <p style="color: red">{{form.name.errors[0]}}</p>
+      {% endif %}
+      {{form.submit()}}
+    </form>
+  </body>
+</html>
+
+
+2.app.py
+@app.route("/", methods=['GET', 'POST'])
+ def home():
+     form = NameForm()
+     if form.validate_on_submit():
+        return f"Hello {form.name.data}"
+        
+     return render_template("index.html",form = form)
+
+
+
+3. Sending_Email Using Flask
+
+from flask import Flask, render_template,request
+from flask_mail import Mail, Message
+from form import RegistrationForm
+
+app = Flask(__name__)
+app.secret_key = "sachinbelbase"
+app.config['MAIL_SERVER'] = "smtp.gmail.com"
+app.config['MAIL_PORT'] = 587 
+app.config['MAIL_USE_TLS'] = True
+app.config['MAIL_USERNAME'] = "sachinbelbase818@gmail.com"  
+app.config['MAIL_PASSWORD'] = "zpjw abie aozn pqem"
+app.config['MAIL_DEFAULT_SENDER'] = "sachinbelbase818@gmail.com"
+
+mail = Mail(app)
+
+@app.route('/')
+def home():
+    return "Welcome!"
+
+@app.route('/send')
+def send_email():
+    form = RegistrationForm()
+    if form.validate_on_submit():
+     return f"Hello {form.name.data}"
+        
+    
+    msg = Message(
+        subject="Hello from Sachin using Flask",
+        recipients=["roshankoirala660@gmail.com","secretgamer794@gmail.com"],
+        body = "This is the test email sent using flask-mail and gmail SMTP!"
+    )
+    
+    mail.send(msg)
+    return "Email has sucessfully send"
+
+    return render_template("index.html",form = form)
+    
+        
+if __name__ == '__main__':
+    app.run(debug=True)
+
+
+
+4. Cookies html
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <h2>Home Page</h2>
+  </body>
+</html>
+
+
+4. Cookies py
+from flask import Flask, make_response, request, render_template
+
+app = Flask(__name__)
+
+### Setting a Cookie ###
+@app.route("/setcookie")
+def set_cookies():
+    resp = make_response("Cookies has been sent!")
+    resp.set_cookie("username","Sachin", max_age=3600)
+    return resp
+
+### Reading a Cookie ###
+@app.route("/getcookie")
+def get_cookie():
+    username = request.cookies.get('username')
+    return f"Hello {username}"
+
+### Delete a Cookie ###
+@app.route("/delcookie")
+def delete_cookie():
+   resp = make_response("Cookies has been deleted!")
+   resp.set_cookie("username", "", expires=0)
+   return resp
+
+### Delete a Cookie in Alternative Way ###
+@app.route("/delcookie1")
+def delete_cookie1():
+    resp = make_response("Cookies has been deleted!")
+    resp.delete_cookie("username")
+    return resp
+
+### Home Page ###
+@app.route("/")
+def home():
+    return render_template("cookies.html")
+
+if __name__ == "__main__":
+    app.run(debug=True)
+
+
+5. 
+
+
+
