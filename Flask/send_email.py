@@ -1,6 +1,6 @@
 from flask import Flask, render_template,request
 from flask_mail import Mail, Message
-from form import RegistrationForm
+from Flask.form import RegistrationForm
 
 app = Flask(__name__)
 app.secret_key = "sachinbelbase"
